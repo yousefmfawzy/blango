@@ -1,8 +1,8 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericRelation
+
 
 class Tag(models.Model):
     value = models.TextField(max_length=100)
@@ -35,7 +35,6 @@ class Comment(models.Model):
     content_object = GenericForeignKey("content_type", "object_id")
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-
 
     def __str__(self):
         return f"Comment by {self.creator} on {self.content_object}"
